@@ -34,7 +34,7 @@ public class particleControl : MonoBehaviour
         mainModule.startSize = 0.5f;
 
         // Every 2 secs we will emit.
-        //InvokeRepeating("DoEmit", 2.0f, 2.0f);
+        InvokeRepeating("DoEmit", 2.0f, 2.0f);
 
         particleArray = new ParticleSystem.Particle[system.main.maxParticles]; 
     }
@@ -45,16 +45,18 @@ public class particleControl : MonoBehaviour
     {
         var currentCount = system.particleCount; 
 
-        if (currentCount> previousCount)
-        {
-
-            Debug.Log("Squeee " + (currentCount- previousCount) + "/"+ currentCount);
-                
-        }
-        previousCount = system.particleCount;
+        //this will only log the first N particles;
+        //if (currentCount> previousCount)
+        //{
+        //    Debug.Log("Squeee " + (currentCount- previousCount) + "/"+ currentCount);
+        //}
+        //previousCount = system.particleCount;
 
         var numParticlesAlive=  system.GetParticles(particleArray);
-        Debug.Log(particleArray[0].position);
+        if (numParticlesAlive > 0)
+        {
+            Debug.Log(particleArray[0].position);
+        }
 
     }
 
