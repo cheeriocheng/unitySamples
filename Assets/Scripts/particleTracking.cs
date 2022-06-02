@@ -9,6 +9,8 @@ public class particleTracking : MonoBehaviour
     private ParticleSystem _parentParticleSystem;
     private IDictionary<uint, ParticleSystem.Particle> _trackedParticles = new Dictionary<uint, ParticleSystem.Particle>();
     int _count;
+    private GameObject sphere;
+
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +18,9 @@ public class particleTracking : MonoBehaviour
         _parentParticleSystem = this.GetComponent<ParticleSystem>();
         if (_parentParticleSystem == null)
             Debug.LogError("Missing ParticleSystem!", this);
+
+        sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        sphere.transform.position = new Vector3(0, 0, 0);
 
         _count = 0;
     }
@@ -30,6 +35,7 @@ public class particleTracking : MonoBehaviour
 
         foreach (var particleAdded in particleDelta.Added)
         {
+            sphere.transform.position = particleAdded.position; 
             Debug.Log("whee" + _count +" " + particleAdded.position );
             _count++;
         }
