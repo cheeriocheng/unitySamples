@@ -13,7 +13,7 @@ public class particleControl : MonoBehaviour
     private ParticleSystem system;
     public Material particleMaterial;
     private ParticleSystem.MainModule mainModule;
-    private ParticleSystem.Particle[] particleArray; 
+    private ParticleSystem.Particle[] particleArray;
     private int previousCount = -1; 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +29,7 @@ public class particleControl : MonoBehaviour
 
         mainModule = system.main;
         //mainModule.useUnscaledTime = true; 
-        mainModule.maxParticles = 12; //maximum particles allowed 
+        mainModule.maxParticles = 1; //maximum particles allowed 
         mainModule.startColor = Color.yellow;
         mainModule.startSize = 0.5f;
 
@@ -51,15 +51,11 @@ public class particleControl : MonoBehaviour
             Debug.Log("Squeee " + (currentCount- previousCount) + "/"+ currentCount);
                 
         }
-        Debug.Log(particleArray[0].position);
-
         previousCount = system.particleCount;
 
-        //if (mainModule.maxParticles == currentCount)
-        //{
-        //    //restart
-        //    //system.SetParticles(mainModule, 0);
-        //}
+        var numParticlesAlive=  system.GetParticles(particleArray);
+        Debug.Log(particleArray[0].position);
+
     }
 
 
